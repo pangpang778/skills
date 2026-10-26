@@ -36,6 +36,17 @@ Use this template for writing the PR body:
 
 Skip all preambles and keep prose brief. Use the user's domain language from `GLOSSARY.md`.
 
+### Scope check
+
+The Summary comes from the primary source (the issue or spec), never inferred from the diff. Verify the branch actually delivers that scope before writing the body:
+
+```bash
+git log <target>..HEAD --oneline    # the commits this PR will carry
+git diff <target>...HEAD --stat     # the files this PR will change
+```
+
+Write the commit list and file tree in the body from these outputs. If either includes work outside the task at hand, the branch was cut from the wrong base: its commit ancestry carries other work that the merge would ship. Recreate the branch from `<target>` and reapply the task's changes before writing anything.
+
 ### Summary
 
 Pick the smallest view that makes the key point clear.
